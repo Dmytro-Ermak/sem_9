@@ -8,19 +8,19 @@ void paging(FILE* file, int str_page, int len) {
     char* str = (char*) malloc(len + 1);
     while ((c = getc(file)) != EOF) {
         if (c == '\n') {
-            printf("%s\n", str);
+            printf("%i: %s\n", ++str_count, str);
             len_count = 0;
-            if (++str_count == str_page) {
+            if (str_count == str_page) {
                 printf(" -- PAGE %i --\n", page++);
                 str_count = 0;            
             }
         } 
         else if (len_count == len) {
-            printf("%s\n", str);
+            printf("%i: %s\n", ++str_count, str);
             len_count = 0;
             str[len_count++] = c;
             str[len_count] = '\0';            
-            if (++str_count == str_page) {
+            if (str_count == str_page) {
                 printf(" -- PAGE %i --\n", page++);
                 str_count = 0;            
             }
@@ -30,7 +30,7 @@ void paging(FILE* file, int str_page, int len) {
             str[len_count] = '\0';
         }
     }
-    printf("%s\n", str);
+    printf("%i: %s\n", ++str_count, str);
     printf(" -- PAGE %i --\n", page);            
     free(str);
 }
